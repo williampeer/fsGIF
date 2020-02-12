@@ -38,6 +38,7 @@ from parameters import ParameterSet
 # Model import
 import fsGIF.fsgif_model as gif
 from fsGIF.fsgif_model import GIF_spiking
+from izhikevich_model import Izhikevich
 home_dir = "/home/alex/Recherche/macke_lab/run/fsGIF"
 # home_dir = os.path.dirname(os.path.dirname(__file__))
 data_dir = home_dir + "/data"
@@ -1141,6 +1142,17 @@ def get_model_params(params, model_type):
         Γ = GIF_spiking.make_connectivity(params.N, params.p)
     elif model_type == 'GIF_mean_field':
         Γ = None
+    elif model_type == 'Izhikevich':
+        Γ = GIF_spiking.make_connectivity(params.N, params.p)
+        model_params = Izhikevich.Parameters(
+            N = params.N,
+            p = params.p,
+            a = params.a,
+            b = params.b,
+            c = params.c,
+            d = params.d
+        )
+        return model_params
     else:
         raise ValueError("Unrecognized model type '{}'.".format(model_type))
 

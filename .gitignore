@@ -6,3 +6,5 @@ theano_compile
 *.params
 profile.sh
 tests/out
+*/__pycache__/*
+*.egg-info*
